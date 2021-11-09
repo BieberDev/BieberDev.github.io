@@ -148,11 +148,11 @@ Das Skript kann als "smarthome-compose.yml" gespeichert und wie folgt aufgerufen
 ```bash
 docker-compose -f smarthome-compose.yml up -d
 ```
-| Syntax | Erklärung                        |
-|--------|----------------------------------|
-| -f     | Gibt die smarthome-compose.yml Datei an |
-| up     | Startet das Skript               |
-| -d     | Wird im Hintergrund ausgeführt   |
+
+```
+-f   compose-Datei
+-d   Wird im Hintergrund ausgeführt
+```
 
 > Nachdem docker-compose die Images heruntergeladen und die Container gestartet hat, sollten 3 Container aktiv laufen:
 ```bash
