@@ -2,7 +2,7 @@
 # All configuration files and data stored in /home/pi/DOCKER_DATA/* #
 #                                                                   #
 # Start command:                                                    #
-# docker-compose -f smarthome-compose.yaml up                       #
+# docker-compose -f smarthome-compose.yaml up -d                    #
 #####################################################################
 version: '3'
 services:
