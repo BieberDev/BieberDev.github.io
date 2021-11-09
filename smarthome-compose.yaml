@@ -1,0 +1,46 @@
+#####################################################################
+# All configuration files and data stored in /home/pi/DOCKER_DATA/* #
+#                                                                   #
+# Start command:                                                    #
+# docker-compose -f smarthome-compose.yaml up                       #
+#####################################################################
+version: '3'
+services:
+#   Setup:  MQTT - Broker [https://hub.docker.com/_/eclipse-mosquitto]
+    mqtt:
+        container_name: mqtt
+        image: eclipse-mosquitto:latest
+        ports:
+            - 1883:1883
+            - 9001:9001
+        volumes:
+            - /home/pi/DOCKER_DATA/MQTT/mosquitto.conf:/mosquitto/config/mosquitto.conf
+            - /home/pi/DOCKER_DATA/MQTT/DATA:/mosquitto/data
+            - /home/pi/DOCKER_DATA/MQTT/LOG:/mosquitto/log
+        restart: always
+
+#   Setup:   ZIGBEE2MQTT [https://hub.docker.com/r/koenkk/zigbee2mqtt]
+    zigbee:
+        container_name: zigbee
+        image: koenkk/zigbee2mqtt:latest
+        ports:
+            - 8080:8080
+        volumes:
+            - /home/pi/DOCKER_DATA/ZIGBEE:/app/data
+            - /run/udev:/run/udev:ro
+        devices:
+            - /dev/ttyACM0:/dev/ttyACM0
+        restart: always
+        privileged: true
+        environment:
+            - TZ=Europe/Berlin
+
+#   Setup:  NODE-RED [https://hub.docker.com/r/nodered/node-red]
+    nodered:
+        container_name: nodered
+        image: nodered/node-red:latest
+        ports:
+            - 1880:1880
+        volumes:
+            - /home/pi/DOCKER_DATA/NODERED:/data
+        restart: always
